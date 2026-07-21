@@ -1,19 +1,25 @@
+import { NavigationContainer } from "@react-navigation/native";
 import { PortalHost } from "@rn-primitives/portal";
-import { NativeRouter, Route, Routes } from "react-router-native";
 
+import { Stack, theme } from "@/navigation";
 import { DetailsScreen } from "@/screens/Details";
 import { HomeScreen } from "@/screens/Home";
 
 export default function App() {
     return (
-        <NativeRouter
-            future={{ v7_relativeSplatPath: true, v7_startTransition: true }}
-        >
-            <Routes>
-                <Route path="/" element={<HomeScreen />} />
-                <Route path="/details" element={<DetailsScreen />} />
-            </Routes>
+        <>
+            <NavigationContainer theme={theme}>
+                <Stack.Navigator
+                    screenOptions={{
+                        headerShown: false,
+                        contentStyle: { backgroundColor: "black" },
+                    }}
+                >
+                    <Stack.Screen name="Home" component={HomeScreen} />
+                    <Stack.Screen name="Details" component={DetailsScreen} />
+                </Stack.Navigator>
+            </NavigationContainer>
             <PortalHost />
-        </NativeRouter>
+        </>
     );
 }
